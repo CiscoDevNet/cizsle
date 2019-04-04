@@ -1,0 +1,2 @@
+# Ignore Pipfile.lock files unless version locking is specifically desired (create exception rules below this one)
+Pipfile.lock
