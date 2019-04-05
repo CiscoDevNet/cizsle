@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Run the project's test suite.
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Lint the source code
+echo "==> Linting the source code"
+flake8
+
+
+# Run the test suite
+echo "==> Running the test suite"
+py.test

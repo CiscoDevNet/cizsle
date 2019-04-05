@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Start running a demo for the project.
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Initialize the application / demo environment
+script/server start
+
+
+# Provide instructions and demo references
+echo "To begin the Demo: Point your browser to http://localhost:8080"

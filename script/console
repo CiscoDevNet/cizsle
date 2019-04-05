@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Build the project's product(s).
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Default environment
+environment=dev
+
+
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        dev)
+        environment=dev
+        ;;
+
+        stage)
+        environment=stage
+        ;;
+
+        prod)
+        environment=prod
+        ;;
+    esac
+done
+
+
+
+# Access the environment's console
+case ${environment} in
+    dev)
+    echo "==> Connecting to development console"
+    ;;
+
+    stage)
+    echo "==> Connecting to staging console"
+    ;;
+
+    prod)
+    echo "==> Connecting to production console"
+    ;;
+
+    *)
+    echo "Unknown argument: $i"
+    exit 1
+    ;;
+esac

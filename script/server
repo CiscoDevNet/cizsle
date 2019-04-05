@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Control the servers related to the project.
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        start)
+        start=true
+        ;;
+
+        stop)
+        stop=true
+        ;;
+
+        reset)
+        reset=true
+        ;;
+    esac
+done
+
+
+# Stop the Servers
+if [ ${stop} ] || [ ${reset} ]; then
+    echo "==> Stopping server(s)"
+fi
+
+
+# Start the Servers
+if [ ${start} ] || [ ${reset} ]; then
+    echo "==> Starting server(s)"
+fi

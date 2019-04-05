@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Verify system dependencies.
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Project Requirements
+requires_python_version="3"
+minimum_python_version="3.5"
+
+
+echo "==> Checking Python system requirements"
+if ! python -c "import sys; sys.exit(0 if sys.version_info.major == int($requires_python_version) else 1)" || \
+   ! python -c "import sys; sys.exit(0 if float(sys.version_info.major + sys.version_info.minor / 10) > float($minimum_python_version) else 1)"; then
+
+    echo >&2 "PYTHON VERSION CHECK FAILED:  This project requires Python v$requires_python_version, with a minimum version of v$minimum_python_version."
+    exit 1
+fi

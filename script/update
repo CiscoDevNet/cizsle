@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Update the project's dependencies.
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        --dev)
+        dev=true
+        ;;
+
+        *)
+        echo "Unknown argument: $i"
+        exit 1
+        ;;
+    esac
+done
+
+
+echo "==> Updating the project"
+
+if [ ${dev} ]; then
+    script/installdeps --dev
+else
+    script/installdeps
+fi
+
+
+# Run database migrations or any other things required to get the state of the
+# app into shape for the current version that is checked out
