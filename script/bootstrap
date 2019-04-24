@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Verify system dependencies.
+# Bootstrap the project by installing all Python project dependencies.
 #
 # AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
 
@@ -8,15 +8,35 @@ set -e
 cd "$(dirname "$0")/.."
 
 
-# Project Requirements
-requires_python_version="3"
-minimum_python_version="3.5"
+echo "==> Verifying project tool chains are present"
 
 
-echo "==> Checking Python system requirements"
-if ! python -c "import sys; sys.exit(0 if sys.version_info.major == int($requires_python_version) else 1)" || \
-   ! python -c "import sys; sys.exit(0 if float(sys.version_info.major + sys.version_info.minor / 10) > float($minimum_python_version) else 1)"; then
+# Ensure that packages are only installed in an active virtual environment
+export PIP_REQUIRE_VIRTUALENV=true
 
-    echo >&2 "PYTHON VERSION CHECK FAILED:  This project requires Python v$requires_python_version, with a minimum version of v$minimum_python_version."
-    exit 1
+
+# Prefer use of a Pipfile and pipenv for dependency management
+if [[ -n "$(pipenv --version 2>/dev/null)" ]]; then
+    echo "==> Using pipenv to setup environment and install Pipfile dependencies"
+    pipenv install --dev
+
+elif [[ -f "requirements.txt" ]]; then
+
+    echo "==> Checking for an active Python virtual environment"
+    if [ -n "$(python -c 'import sys; print (sys.real_prefix)' 2>/dev/null)" ]; then
+        echo "SUCCESS!  We are running in an active virtual environment.  We'll install the packages here."
+    else
+        printf "%s" \
+            "VIRTUAL ENVIRONMENT ERROR: This project will only install packages into a Python virtual environment.  " \
+            "Please activate the virtual environment you want to use for your work with this project and rerun the " \
+            "setup script."
+        exit 1
+    fi
+
+    echo "==> Installing requirements.txt dependencies"
+    pip install -r requirements.txt
+
+    echo "==> Installing requirements-dev.txt dependencies"
+    pip install -r requirements-dev.txt
+
 fi

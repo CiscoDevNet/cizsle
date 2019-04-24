@@ -8,29 +8,25 @@ set -e
 cd "$(dirname "$0")/.."
 
 
-# Process Script Arguments
-for i in ${@}; do
-    case ${i} in
-        --dev)
-        dev=true
-        ;;
+echo "===> Updating the project's dependencies"
 
-        *)
-        echo "Unknown argument: $i"
-        exit 1
-        ;;
-    esac
-done
-
-
-echo "==> Updating the project"
-
-if [ ${dev} ]; then
-    script/installdeps --dev
-else
-    script/installdeps
+# Ensure pipenv is installed
+if ! [[ -n "$(pipenv --version 2>/dev/null)" ]]; then
+    printf "%s" \
+        "ERROR: Pipenv is not installed.  We are using the pipenv (https://pipenv.readthedocs.io) tool to manage the " \
+        "Python dependencies for this project.  Please install pipenv and rerun this script to update the project " \
+        "dependencies."
+    pipenv install --dev
 fi
 
+echo "==> Updating Pipfile.lock and upgrading installed dependencies"
+pipenv update
 
-# Run database migrations or any other things required to get the state of the
-# app into shape for the current version that is checked out
+echo "==> Updating requirements.txt file"
+pipenv lock -r > requirements.txt
+
+echo "==> Updating requirements-dev.txt file"
+pipenv lock -r --dev > requirements-dev.txt
+
+echo ""
+echo "SUCCESS! The project dependencies have been updated."

@@ -7,41 +7,8 @@ set -e
 cd "$(dirname "$0")/.."
 
 
-# Process Script Arguments
-for i in ${@}; do
-    case ${i} in
-        --dev)
-        dev=true
-        ;;
-
-        *)
-        echo "Unknown argument: $i"
-        exit 1
-        ;;
-    esac
-done
-
-
-echo "==> Setting up / resetting project for initial use"
+echo "===> Setting up / resetting project for initial use"
 
 script/clean --deep
 
-if [ ${dev} ]; then
-    script/installdeps --dev
-else
-    script/installdeps
-fi
-
-
-# Perform additional tasks needed to prepare the project for use
-
-# Setup configuration files
-
-# Create environment files
-
-# Setup database
-
-
-
-# Run database migrations or any other things required to get the state of the
-# app into shape for the current version that is checked out
+script/bootstrap
