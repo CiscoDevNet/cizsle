@@ -4,6 +4,10 @@ cizsle | Cisco ZTP Server LE
 
 *Zero-Touch Provisioning (ZTP) Server for Cisco Network Devices*
 
+.. image:: https://readthedocs.org/projects/cizsle/badge/?version=latest
+    :target: https://cizsle.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 ------------------------------------------------------------------------------------------------------------------------
 
 The goal of this project is to develop a Zero Touch Provisioning (ZTP) Server to simplify and accelerate deployment of
