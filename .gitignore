@@ -2,5 +2,16 @@
 Pipfile.lock
 
 
-# Ignore Build Artifacts
+# Python Artifacts
+*.py[cod]
+
+
+# Build Artifacts
+dist/
 docs/_build/
+*.egg-info/
+
+
+# Test artifacts
+.cache/
+.pytest_cache/
