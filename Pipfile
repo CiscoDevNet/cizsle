@@ -9,6 +9,7 @@ flake8 = "*"
 sphinx = "*"
 
 [packages]
+cizsle = {editable = true,path = "."}
 
 [requires]
 python_version = "3.6"

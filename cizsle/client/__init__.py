@@ -1,0 +1,1 @@
+"""Cizsle CLI client."""
