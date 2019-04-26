@@ -1,3 +1,9 @@
+"""Spinx configuration script."""
+
+
+import cizsle
+
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -17,12 +23,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'cizsle'
-copyright = 'Copyright (c) 2019 Cisco and/or its affiliates.'
-author = 'See https://github.com/CiscoDevNet/cizsle/blob/master/AUTHORS.rst'
+project = cizsle.__project_name__
+copyright = cizsle.__copyright__
+author = cizsle.__author__
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.1'
+release = cizsle.__version__
 
 
 # -- General configuration ---------------------------------------------------

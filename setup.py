@@ -59,13 +59,13 @@ with open(package_dir/"_metadata.py") as file:
 
 
 # Get the long description from the project's README.rst file
-with open(project_root / "README.rst") as file:
+with open(project_root/"README.rst") as file:
     long_description = file.read()
 
 
 # Call setuptools.setup()
 setup(
-    name=metadata["__title__"],
+    name=PACKAGE_NAME,
     version=metadata["__version__"],
     description=metadata["__description__"],
     long_description=long_description,
