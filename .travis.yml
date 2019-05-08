@@ -6,12 +6,14 @@ install: script/ci init build install bootstrap
 
 jobs:
   allow_failures:
+    - script: script/test lint
+    - script: script/test docs
+  include:
     - stage: "Tests"
       name: "Lint Code"
       script: script/test lint
     - name: "Build Docs"
       script: script/test docs
-  include:
     - name: "Cizsle Server"
       script: script/test server
     - name: "Cizsle Client"
