@@ -37,13 +37,13 @@ echo "==> Cleaning previous build artifacts"
 script/clean
 
 
-if [ ${all} ] || [ ${package} ]; then
+if [[ ${all} ]] || [[ ${package} ]]; then
     echo "==> Building the Source Distribution package"
     python setup.py sdist
 fi
 
 
-if [ ${all} ] || [ ${docs} ]; then
+if [[ ${all} ]] || [[ ${docs} ]]; then
     echo "==> Building the Docs"
     make -C docs clean
     make -C docs html

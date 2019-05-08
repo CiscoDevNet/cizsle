@@ -8,6 +8,31 @@ set -e
 cd "$(dirname "$0")/.."
 
 
+# Default build
+all=true
+
+
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        --user)
+        all=
+        user=true
+        ;;
+
+        --dev)
+        all=
+        dev=true
+        ;;
+
+        *)
+        echo "Unknown argument: $i"
+        exit 1
+        ;;
+    esac
+done
+
+
 echo "==> Verifying project tool chains are present"
 
 
@@ -18,10 +43,17 @@ export PIP_REQUIRE_VIRTUALENV=true
 # Prefer use of a Pipfile and pipenv for dependency management
 if [[ -n "$(pipenv --version 2>/dev/null)" ]]; then
     echo "==> Using pipenv to setup environment and install Pipfile dependencies"
-    pipenv install --dev
+    if [[ ${all} ]] || [[ ${user} ]]; then
+        echo "Installing user dependencies"
+        pipenv install
+    fi
 
-elif [[ -f "requirements.txt" ]]; then
+    if [[ ${all} ]] || [[ ${dev} ]]; then
+        echo "Installing user and developer dependencies"
+        pipenv install --dev
+    fi
 
+else
     echo "==> Checking for an active Python virtual environment"
     if [ -n "$(python -c 'import sys; print (sys.real_prefix)' 2>/dev/null)" ]; then
         echo "SUCCESS!  We are running in an active virtual environment.  We'll install the packages here."
@@ -33,10 +65,14 @@ elif [[ -f "requirements.txt" ]]; then
         exit 1
     fi
 
-    echo "==> Installing requirements.txt dependencies"
-    pip install -r requirements.txt
+    echo "==> Using pipenv to setup environment and install Pipfile dependencies"
+    if [[ ${all} ]] || [[ ${user} ]]; then
+        echo "Installing user dependencies from requirements.txt"
+        pip install -r requirements.txt
+    fi
 
-    echo "==> Installing requirements-dev.txt dependencies"
-    pip install -r requirements-dev.txt
-
+    if [[ ${all} ]] || [[ ${dev} ]]; then
+        echo "Installing developer dependencies from requirements-dev.txt"
+        pip install -r requirements-dev.txt
+    fi
 fi

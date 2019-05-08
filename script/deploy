@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Deploy the built project artifacts.
+#
+# AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
+
+
+set -e
+cd "$(dirname "$0")/.."
+
+
+# Default build
+all=true
+
+
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        pypi)
+        all=
+        python=true
+        ;;
+
+        dockerhub)
+        all=
+        docker=true
+        ;;
+
+        *)
+        echo "Unknown argument: $i"
+        exit 1
+        ;;
+    esac
+done
+
+
+echo "===> Deploying project artifacts"
+
+
+if [[ ${all} ]] || [[ ${pypi} ]]; then
+    script/build package
+    echo "==> Uploading Python package to PyPI"
+    twine upload dist/cizsle-${VERSION}.tar.gz
+fi

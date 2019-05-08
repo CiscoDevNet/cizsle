@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run the project's test suite.
+# Continuous Integration and Continuous Deployment steps.
 #
 # AUTHOR(s): Chris Lunsford <chrlunsf@cisco.com>
 
@@ -8,20 +8,81 @@ set -e
 cd "$(dirname "$0")/.."
 
 
-# Initialize the CI environment
-echo "==> Initializing the CI environment"
+# Default
+all=true
 
 
-# Setup the project
-script/setup --dev
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        init)
+        all=
+        init=true
+        ;;
+
+        build)
+        all=
+        build=true
+        ;;
+
+        install)
+        all=
+        install=true
+        ;;
+
+        bootstrap)
+        all=
+        bootstrap=true
+        ;;
+
+        test)
+        all=
+        test=true
+        ;;
+
+        deploy)
+        all=
+        deploy=true
+        ;;
+
+        *)
+        echo "Unknown argument: $i"
+        exit 1
+        ;;
+    esac
+done
 
 
-# Run the test suite
-script/test
+if [[ ${all} ]] || [[ ${init} ]]; then
+    echo "===> Initializing the CI environment"
+    echo "Sourcing package VERSION environment variable"
+    export VERSION=$(< VERSION)
+fi
 
 
-# Build the product(s)
-script/build
+
+if [[ ${all} ]] || [[ ${build} ]]; then
+    script/build package
+fi
 
 
-# Push the builds
+if [[ ${all} ]] || [[ ${install} ]]; then
+    echo "==> Installing the Python package"
+    pip install dist/cizsle-${VERSION}.tar.gz
+fi
+
+
+if [[ ${all} ]] || [[ ${bootstrap} ]]; then
+    script/bootstrap --dev
+fi
+
+
+
+if [[ ${all} ]] || [[ ${test} ]]; then
+    script/test
+fi
+
+
+if [[ ${deploy} ]]; then
+    script/deploy
+fi
