@@ -9,6 +9,8 @@ cizsle | Cisco ZTP Server LE
 .. image:: https://readthedocs.org/projects/cizsle/badge/?version=latest
     :target: https://cizsle.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
+.. image:: https://codecov.io/gh/CiscoDevNet/cizsle/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/CiscoDevNet/cizsle
 
 ------------------------------------------------------------------------------------------------------------------------
 
