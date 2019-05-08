@@ -10,6 +10,8 @@ Welcome to cizsle's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   authors
+
 
 
 Indices and tables
