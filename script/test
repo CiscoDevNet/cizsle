@@ -8,11 +8,65 @@ set -e
 cd "$(dirname "$0")/.."
 
 
-# Lint the source code
-echo "==> Linting the source code"
-flake8
+# Default
+all=true
 
 
-# Run the test suite
-echo "==> Running the test suite"
-py.test
+# Process Script Arguments
+for i in ${@}; do
+    case ${i} in
+        lint)
+        all=
+        lint=true
+        ;;
+
+        docs)
+        all=
+        docs=true
+        ;;
+
+        server)
+        all=
+        server=true
+        ;;
+
+        bootstrap)
+        all=
+        bootstrap=true
+        ;;
+
+        client)
+        all=
+        client=true
+        ;;
+
+        *)
+        echo "Unknown argument: $i"
+        exit 1
+        ;;
+    esac
+done
+
+
+if [[ ${all} ]] || [[ ${lint} ]]; then
+    echo "==> Linting the source code"
+    flake8
+fi
+
+
+if [[ ${all} ]] || [[ ${docs} ]]; then
+    echo "==> Testing the cizsle docs"
+    make -C docs html SPHINXOPTS="-W"
+fi
+
+
+if [[ ${all} ]] || [[ ${server} ]]; then
+    echo "==> Running the cizsle Server test suite"
+    py.test -m server
+fi
+
+
+if [[ ${all} ]] || [[ ${client} ]]; then
+    echo "==> Running the cizsle Client test suite"
+    py.test -m client
+fi
