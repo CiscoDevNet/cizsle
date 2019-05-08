@@ -1,0 +1,28 @@
+language: python
+python:
+  - "3.6"
+
+install: script/ci init build install bootstrap
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Lint Code"
+      script: script/test lint
+    - name: "Build Docs"
+      script: script/test docs
+    - name: "Cizsle Server"
+      script: script/test server
+    - name: "Cizsle Client"
+      script: script/test client
+
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: cmlccie
+  password:
+    secure: SECURE_PASSWORD
+  on:
+    tags: true
+    repo: CiscoDevNet/cizsle
+    python: 3.6
