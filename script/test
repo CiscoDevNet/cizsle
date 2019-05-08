@@ -68,11 +68,11 @@ fi
 
 if [[ ${all} ]] || [[ ${server} ]]; then
     echo "==> Running the cizsle Server test suite"
-    py.test pytest --cov=cizsle --cov-append tests/ -m server
+    pytest --cov=cizsle --cov-append tests/ -m server
 fi
 
 
 if [[ ${all} ]] || [[ ${client} ]]; then
     echo "==> Running the cizsle Client test suite"
-    py.test pytest --cov=cizsle --cov-append tests/ -m client
+    pytest --cov=cizsle --cov-append tests/ -m client
 fi
