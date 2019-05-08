@@ -10,6 +10,8 @@ sphinx = "*"
 bump2version = "*"
 twine = "*"
 pytest = "*"
+pytest-cov = "*"
+codecov = "*"
 
 [packages]
 cizsle = {editable = true,path = "."}

@@ -48,6 +48,11 @@ for i in ${@}; do
 done
 
 
+if [[ ${all} ]]; then
+    script/clean
+fi
+
+
 if [[ ${all} ]] || [[ ${lint} ]]; then
     echo "==> Linting the source code"
     flake8
@@ -57,16 +62,17 @@ fi
 if [[ ${all} ]] || [[ ${docs} ]]; then
     echo "==> Testing the cizsle docs"
     make -C docs html SPHINXOPTS="-W"
+    cd "$(dirname "$0")/.."
 fi
 
 
 if [[ ${all} ]] || [[ ${server} ]]; then
     echo "==> Running the cizsle Server test suite"
-    py.test -m server
+    py.test pytest --cov=cizsle --cov-append tests/ -m server
 fi
 
 
 if [[ ${all} ]] || [[ ${client} ]]; then
     echo "==> Running the cizsle Client test suite"
-    py.test -m client
+    py.test pytest --cov=cizsle --cov-append tests/ -m client
 fi

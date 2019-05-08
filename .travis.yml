@@ -1,4 +1,5 @@
 language: python
+cache: pip
 python:
   - "3.6"
 
@@ -8,16 +9,15 @@ jobs:
   allow_failures:
     - script: script/test lint
     - script: script/test docs
+    - script: codecov
   include:
     - stage: "Tests"
-      name: "Lint Code"
-      script: script/test lint
-    - name: "Build Docs"
-      script: script/test docs
-    - name: "Cizsle Server"
-      script: script/test server
-    - name: "Cizsle Client"
-      script: script/test client
+      script:
+        - script/test lint
+        - script/test docs
+        - script/test server
+        - script/test client
+        - codecov
 
 deploy:
   provider: pypi
