@@ -1,31 +1,36 @@
 language: python
 cache: pip
 python:
-  - "3.6"
-
-install: script/ci init build install bootstrap
-
+- '3.6'
+install: true
 jobs:
   allow_failures:
-    - script: script/test lint
-    - script: script/test docs
-    - script: codecov
+  - script: script/test lint
+  - script: script/test docs
+  - script: codecov
   include:
-    - stage: "Tests"
-      script:
-        - script/test lint
-        - script/test docs
-        - script/test server
-        - script/test client
-        - codecov
-
+  - stage: Repo Tests
+    name: Lint Code
+    before_script: pip install flake8
+    script: script/test lint
+  - name: Build Docs
+    before_script: script/ci init build install bootstrap
+    script: script/test docs
+  - stage: Unit Tests
+    name: Cizsle
+    before_script: script/ci init build install bootstrap
+    script:
+    - script/test server
+    - script/test client
+    - codecov
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: cmlccie
   password:
-    secure: SECURE_PASSWORD
+    secure: fm8Wn6RAWNxIvp2lbsyvxEIQtY6sixQSliw+srk50CCx9qOyQeOcFFeBlK2abEN5QQYd7HEetP5FyP3Zed8oQLjc9GOyNpR7iUWc7/a6Dz1DE/rAveZhikzb22B/fKOLcO3swEeyUn+IvW2TQvzatHrrTU+z8iYc981o6D2WBK4ZyKTfczj6CM2kqr+GH0o11/xY26DOiQfDxomq8EmVL2wFcJXD4E50T4e8bY82t2LAjAn9mh+o2+gCelAUUbW4vllMWULGcCrOdKzVQJW5Vwbhv8Rowisd+lHPkJ64Br3lz0Zgmgut41XiG5hD1yv8/IKwjyskBsQrZyRJBu9Ys9a9pE3+GXK/zc+i3yhP7yKq4/zXKhMBGs8XMFqXIk7fCTNp2seYhRBi1Yisg1pPqKK6N9xpIBfIzy5/c7JJ4kq6WNsbX5Xx7zpfz2oq+iwRulfWPgFUXwkRqYwy1r7ZoGuW0UDf66jTw1m3vsrb/aDDMo7RqDHGhELmub9fDA5S/lrJzUdTMB3NuNttQo3w1MIDszqiW0oDoJP0ojKf7UTnNW0NQGctWWUnwQgC73oVPwAthJZJmT0+pdBng8IEzN/DK/PwlcfV0DZ4yvimMMsDjBNynmD0RUcDJfDID+dbub309618RK9DmNtfUlSTtR2AEmV1vlMaZVyY+3a38RI=
   on:
-    tags: true
     repo: CiscoDevNet/cizsle
+    branch: master
+    tags: true
     python: 3.6
