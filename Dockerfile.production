@@ -1,4 +1,4 @@
-# Cizsle Server - Development Docker Image
+# Cizsle Server - Production Docker Image
 FROM python:3.6-alpine
 
 ARG user=cizsle
