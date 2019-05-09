@@ -32,6 +32,7 @@ jobs:
     - codecov
 
   - stage: Deploy
+    script: skip
     deploy:
       provider: pypi
       distributions: sdist
