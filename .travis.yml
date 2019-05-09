@@ -33,7 +33,6 @@ jobs:
 
   - stage: Deploy
     deploy:
-      script: script/build package
       provider: pypi
       distributions: sdist
       user: cmlccie
