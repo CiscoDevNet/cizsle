@@ -1,0 +1,18 @@
+# Ignore Everything
+**
+
+
+# Include Only What Is Needed
+
+!requirements.txt
+!requirements-dev.txt
+
+!setup.*
+!cizsle
+
+!tests
+
+!docs
+!*.rst
+
+!script
