@@ -24,6 +24,7 @@ pipenv update
 
 echo "==> Updating requirements.txt file"
 pipenv lock -r > requirements.txt
+sed -i "" '/-e \./d' requirements.txt
 
 echo "==> Updating requirements-dev.txt file"
 pipenv lock -r --dev > requirements-dev.txt

@@ -1,5 +1,4 @@
 -i https://pypi.org/simple
--e .
 certifi==2019.3.9
 chardet==3.0.4
 click==7.0
