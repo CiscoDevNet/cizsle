@@ -4,6 +4,10 @@ cizsle | Cisco ZTP Server LE
 
 *Zero-Touch Provisioning (ZTP) Server for Cisco Network Devices*
 
+.. image:: https://img.shields.io/pypi/v/cizsle.svg
+    :target: https://pypi.org/project/cizsle/
+.. image:: https://img.shields.io/pypi/pyversions/cizsle.svg
+    :target: https://pypi.org/project/cizsle/
 .. image:: https://travis-ci.org/CiscoDevNet/cizsle.svg?branch=master
     :target: https://travis-ci.org/CiscoDevNet/cizsle
 .. image:: https://readthedocs.org/projects/cizsle/badge/?version=latest
