@@ -14,12 +14,12 @@ ENV LC_ALL=C.UTF-8 \
 
 
 # Install system packages
-# Needed for development-only
 RUN apk add --no-cache bash make
 
 
-# Ensure Python package installation tools are up-to-date
-RUN pip install -q --upgrade --no-cache-dir pip setuptools wheel
+# Ensure Python package installation tools are up-to-date and install pipenv
+RUN pip install -q --upgrade --no-cache-dir pip setuptools wheel && \
+    pip install -q --no-cache-dir pipenv
 
 
 # Setup directories and non-priviledged user
@@ -28,15 +28,12 @@ RUN mkdir -p $app_dir $admin_dir && \
     adduser -D -G $group -u $uid $user
 ENV PATH=/home/$user/.local/bin:$PATH
 USER $user
+WORKDIR $app_dir
 
 
-# Install app dependencies
-COPY requirements.txt requirements-dev.txt $app_dir/
-RUN pip install --user -q --no-cache-dir -r $app_dir/requirements.txt -r $app_dir/requirements-dev.txt
-
-
-# Copy Application Code
-COPY ./ $app_dir/
+# Install app and development dependencies
+COPY requirements.txt requirements-dev.txt ./
+RUN pip install --user -q --no-cache-dir -r requirements.txt -r requirements-dev.txt
 
 
 # Fix Permissions
@@ -46,14 +43,9 @@ RUN chown -R $user:$group $app_dir $admin_dir && \
 USER $user
 
 
-# Install App
-RUN pip install --user --no-cache-dir -e $app_dir/
-
-
 # Expose Volume(s) and set the working directory
 VOLUME $admin_dir $app_dir
-WORKDIR $app_dir
 
 
 # Start the cizsle server
-CMD ["cizsle-server"]
+CMD ["/bin/sh"]
