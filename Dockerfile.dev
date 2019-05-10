@@ -14,7 +14,11 @@ ENV LC_ALL=C.UTF-8 \
 
 
 # Install system packages
-RUN apk add --no-cache bash make
+RUN apk add --no-cache \
+    bash \
+    make \
+    .build-deps \
+    build-base
 
 
 # Ensure Python package installation tools are up-to-date and install pipenv
