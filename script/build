@@ -62,11 +62,11 @@ fi
 
 if [[ ${all} ]] || [[ ${docker_dev} ]]; then
     echo "==> Building Development Docker Image"
-    docker build -t cizsle:dev ./
+    docker build -f Dockerfile.dev -t cizsle:dev ./
 fi
 
 
 if [[ ${all} ]] || [[ ${docker} ]]; then
     echo "==> Building Docker Image"
-    docker build -f Dockerfile.production -t cizsle:latest ./
+    docker build -f Dockerfile -t cizsle:latest ./
 fi
