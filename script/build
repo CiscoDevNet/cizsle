@@ -25,6 +25,16 @@ for i in ${@}; do
         docs=true
         ;;
 
+        docker-dev)
+        all=
+        docker_dev=true
+        ;;
+
+        docker)
+        all=
+        docker=true
+        ;;
+
         *)
         echo "Unknown argument: $i"
         exit 1
@@ -47,4 +57,16 @@ if [[ ${all} ]] || [[ ${docs} ]]; then
     echo "==> Building the Docs"
     make -C docs clean
     make -C docs html
+fi
+
+
+if [[ ${all} ]] || [[ ${docker_dev} ]]; then
+    echo "==> Building Development Docker Image"
+    docker build -t cizsle:dev ./
+fi
+
+
+if [[ ${all} ]] || [[ ${docker} ]]; then
+    echo "==> Building Docker Image"
+    docker build -f Dockerfile.production -t cizsle:latest ./
 fi
