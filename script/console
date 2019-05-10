@@ -35,14 +35,12 @@ done
 case ${environment} in
     dev)
     echo "==> Connecting to development console"
-    ;;
-
-    stage)
-    echo "==> Connecting to staging console"
+    docker run --rm -it -v "$PWD:/home/cizsle/app" cizsle:dev
     ;;
 
     prod)
     echo "==> Connecting to production console"
+    docker run --rm -it cizsle:latest /bin/sh
     ;;
 
     *)
