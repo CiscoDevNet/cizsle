@@ -15,15 +15,13 @@ ENV LC_ALL=C.UTF-8 \
 
 # Install system packages
 RUN apk add --no-cache \
+    --virtual .build-deps build-base \
     bash \
-    make \
-    .build-deps \
-    build-base
+    make
 
 
-# Ensure Python package installation tools are up-to-date and install pipenv
-RUN pip install -q --upgrade --no-cache-dir pip setuptools wheel && \
-    pip install -q --no-cache-dir pipenv
+# Ensure Python package installation tools are up-to-date
+RUN pip install -q --upgrade --no-cache-dir pip setuptools wheel pipenv
 
 
 # Setup directories and non-priviledged user
@@ -42,8 +40,7 @@ RUN pip install --user -q --no-cache-dir -r requirements.txt -r requirements-dev
 
 # Fix Permissions
 USER root
-RUN chown -R $user:$group $app_dir $admin_dir && \
-    chmod 755 $app_dir $admin_dir
+RUN chown -R $user:$group $app_dir $admin_dir
 USER $user
 
 
