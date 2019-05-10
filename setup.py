@@ -36,7 +36,10 @@ DEPENDENCIES = [
 ]
 
 OPTIONAL_DEPENDENCIES = {
-    "server": []
+    "server": [
+        "fastapi",
+        "uvicorn",
+    ]
 }
 
 ENTRY_POINTS = {

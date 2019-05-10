@@ -14,7 +14,7 @@ pytest-cov = "*"
 codecov = "*"
 
 [packages]
-cizsle = {editable = true,path = "."}
+cizsle = {editable = true,extras = ["server"],path = "."}
 
 [requires]
 python_version = "3.6"
