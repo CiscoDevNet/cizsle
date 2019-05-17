@@ -45,7 +45,7 @@ OPTIONAL_DEPENDENCIES = {
 ENTRY_POINTS = {
     "console_scripts": [
         "cizsle = cizsle.client.__main__:main",
-        "cizsle-server = cizsle.server.__main__:main [server]",
+        "cizsle-server = cizsle.server.__main__:server_cli [server]",
     ]
 }
 
