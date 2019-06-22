@@ -12,6 +12,7 @@ twine = "*"
 pytest = "*"
 pytest-cov = "*"
 codecov = "*"
+ipython = "*"
 
 [packages]
 cizsle = {editable = true,extras = ["server"],path = "."}
