@@ -1,0 +1,4 @@
+[console_scripts]
+cizsle = cizsle.client.cli:cli
+cizsle-server = cizsle.server.cli:cli [server]
+

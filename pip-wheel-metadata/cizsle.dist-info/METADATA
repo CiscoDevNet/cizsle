@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: cizsle
+Version: 0.0a7
+Summary: Cisco ZTP Server LE
+Home-page: https://github.com/CiscoDevNet/cizsle
+Author: Cisco and Contributors
+Author-email: cizsle@cisco.com
+License: UNKNOWN
+Download-URL: https://pypi.python.org/pypi/cizsle
+Keywords: cisco ztp ios-xe catalyst
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Natural Language :: English
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: System :: Installation/Setup
+Classifier: Topic :: System :: Software Distribution
+Requires-Dist: click
+Requires-Dist: crayons
+Requires-Dist: requests (>=2.20.0)
+Provides-Extra: server
+Requires-Dist: email-validator ; extra == 'server'
+Requires-Dist: fastapi ; extra == 'server'
+Requires-Dist: uvicorn ; extra == 'server'
+
+----------------------------
+cizsle | Cisco ZTP Server LE
+----------------------------
+
+*Zero-Touch Provisioning (ZTP) Server for Cisco Network Devices*
+
+.. image:: https://img.shields.io/pypi/v/cizsle.svg
+    :target: https://pypi.org/project/cizsle/
+.. image:: https://img.shields.io/pypi/pyversions/cizsle.svg
+    :target: https://pypi.org/project/cizsle/
+.. image:: https://travis-ci.org/CiscoDevNet/cizsle.svg?branch=master
+    :target: https://travis-ci.org/CiscoDevNet/cizsle
+.. image:: https://readthedocs.org/projects/cizsle/badge/?version=latest
+    :target: https://cizsle.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+.. image:: https://codecov.io/gh/CiscoDevNet/cizsle/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/CiscoDevNet/cizsle
+
+------------------------------------------------------------------------------------------------------------------------
+
+The goal of this project is to develop a Zero Touch Provisioning (ZTP) Server to simplify and accelerate deployment of
+Cisco networking devices.
+
+Project Targets
+---------------
+
+- Developed in Python
+- Deployed in Docker containers
+
+Key Features
+------------
+
+- Support ZTP on IOS XE, IOS XR, and NXOS devices
+- Template and scripted device configurations
+- Software image upgrades
+- Topology validation
+- Intuitive web UI and concise CLI
+
+

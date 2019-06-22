@@ -1,4 +1,6 @@
-"""Cizsle CLI client."""
+"""Cizsle client."""
 
 
-from .__main__ import main  # noqa: F401
+def main():
+    """Cizsle client."""
+    print("This will run the cizsle client.")

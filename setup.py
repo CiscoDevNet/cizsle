@@ -37,6 +37,7 @@ DEPENDENCIES = [
 
 OPTIONAL_DEPENDENCIES = {
     "server": [
+        "email-validator",
         "fastapi",
         "uvicorn",
     ]
@@ -44,8 +45,8 @@ OPTIONAL_DEPENDENCIES = {
 
 ENTRY_POINTS = {
     "console_scripts": [
-        "cizsle = cizsle.client.__main__:main",
-        "cizsle-server = cizsle.server.__main__:server_cli [server]",
+        "cizsle = cizsle.client.cli:cli",
+        "cizsle-server = cizsle.server.cli:cli [server]",
     ]
 }
 
