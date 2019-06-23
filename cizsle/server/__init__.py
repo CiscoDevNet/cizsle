@@ -30,7 +30,7 @@ def run(
         reload: Enable web service auto-reloading (used for development).
     """
     uvicorn.run(
-        cizsle.server.web.web_service,
+        "cizsle.server.web:api",
         host=bind_ip,
         port=port,
         debug=debug,
