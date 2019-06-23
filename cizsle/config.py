@@ -28,3 +28,8 @@ CIZSLE_WEB_SERVICE_WORKERS = int(os.environ.get(
 CIZSLE_WEB_SERVICE_AUTO_RELOAD = bool(os.environ.get(
     "CIZSLE_WEB_SERVICE_AUTO_RELOAD", False
 ))
+
+
+# MondoDB
+MONGO_DATABASE = "cizsle"
+MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
