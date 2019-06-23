@@ -37,8 +37,12 @@ DEPENDENCIES = [
 
 OPTIONAL_DEPENDENCIES = {
     "server": [
-        "email-validator",
+        "email_validator",
         "fastapi",
+        "jinja2",
+        "mongoengine",
+        "pyyaml",
+        "ujson",
         "uvicorn",
     ]
 }
