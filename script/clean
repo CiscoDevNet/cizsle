@@ -32,9 +32,10 @@ find . -name '*~' -exec rm -f {} +
 find . -name '__pycache__' -exec rm -fr {} +
 find . -name '*.egg-info' -exec rm -fr {} +
 find . -name '*.egg' -exec rm -f {} +
+rm -rf .eggs/
 rm -rf build/
 rm -rf dist/
-rm -rf .eggs/
+rm -rf pip-wheel-metadata/
 
 echo "Removing test and coverage artifacts"
 rm -rf .cache/

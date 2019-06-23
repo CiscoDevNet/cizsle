@@ -10,6 +10,7 @@ Pipfile.lock
 dist/
 docs/_build/
 *.egg-info/
+pip-wheel-metadata/
 
 
 # Test artifacts
