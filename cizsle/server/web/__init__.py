@@ -1,12 +1,20 @@
 """Cizsle server web service."""
 
 
-from fastapi import FastAPI
+import fastapi
+
+import cizsle.config
 
 
-web_service = FastAPI()
+api = fastapi.FastAPI(
+    debug=cizsle.config.debug,
+    title="cizsle",
+    description="Cisco ZTP Server LE",
+    version=cizsle.__version__,
+    openapi_url="/api/openapi.json",
+    docs_url="/api/docs",
+)
 
 
-@web_service.get("/")
-async def root():
-    return {"message": "FastAPI web service is running."}
+# Views
+import cizsle.server.web.views.config   # noqa
